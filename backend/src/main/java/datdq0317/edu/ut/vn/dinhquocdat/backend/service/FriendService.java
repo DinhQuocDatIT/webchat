@@ -1,0 +1,105 @@
+package datdq0317.edu.ut.vn.dinhquocdat.backend.service;
+
+import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Friend;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.model.FriendshipStatus;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.repository.IFriendRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class FriendService implements IFriendService {
+
+    @Autowired
+    private IFriendRepository friendRepository;
+    @Autowired
+    private IUserService userService;
+
+    @Override
+    public void addFriend(Integer senderId, Integer receiverId) {
+
+        if(senderId.equals(receiverId)) {
+            throw new RuntimeException("Không thể kết bạn với chính mình");
+        }
+        if (friendRepository.existsAccepted(senderId, receiverId)) {
+            throw new RuntimeException("Đã là bạn bè");
+        }
+
+
+
+        // không được gủi lời khi đã bị từ chối
+        Optional<Friend>  rejectFriend = friendRepository.findByUserIdAndFriendId(senderId, receiverId);
+        if(rejectFriend.isPresent()) {
+            if(rejectFriend.get().getStatus() == FriendshipStatus.REJECTED) {
+                throw new RuntimeException("Bạn đã bị từ chối lời mời không được gửi lại");
+            }
+            if (rejectFriend.get().getStatus() == FriendshipStatus.PENDING) {
+                throw new RuntimeException("Đang trong trạng thái chờ chấp nhận lời mời");
+            }
+        }
+        // gửi lời khi đã từ chối người đó
+        Optional<Friend> noRejectFriend = friendRepository.findByUserIdAndFriendId(receiverId, senderId);
+        if(noRejectFriend.isPresent()) {
+            if(noRejectFriend.get().getStatus().equals(FriendshipStatus.PENDING)){
+                throw new RuntimeException("Người này đã gửi lởi mời cho bạn");
+            }
+            if(noRejectFriend.get().getStatus().equals(FriendshipStatus.REJECTED)){
+                noRejectFriend.get().setStatus(FriendshipStatus.PENDING);
+                friendRepository.save(noRejectFriend.get());
+                return;
+            }
+        }
+        Friend friend = new Friend();
+        User sender = userService.findById(senderId).orElseThrow(() -> new RuntimeException("Không tìm thấy người gửi"));
+        User receiver = userService.findById(receiverId).orElseThrow(() -> new RuntimeException("Không tìm thấy người nhận"));
+        friend.setUser(sender);
+        friend.setFriend(receiver);
+        friend.setStatus(FriendshipStatus.PENDING);
+        friendRepository.save(friend);
+    }
+
+    @Override
+    public void acceptFriend(Integer receiverId,Integer senderId) {
+        Friend request = friendRepository
+                .findByUserIdAndFriendId(senderId, receiverId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy lời mời"));
+        if (request.getStatus() != FriendshipStatus.PENDING){
+            throw new RuntimeException("Lời mời không hợp lệ");
+        }
+        request.setStatus(FriendshipStatus.ACCEPTED);
+        friendRepository.save(request);
+        friendRepository.findByUserIdAndFriendId(receiverId, senderId)
+                .orElseGet(() -> {
+                    Friend reverse = new Friend();
+                    reverse.setUser(userService.findById(receiverId).orElseThrow());
+                    reverse.setFriend(userService.findById(senderId).orElseThrow());
+                    reverse.setStatus(FriendshipStatus.ACCEPTED);
+                    return friendRepository.save(reverse);
+                });
+
+
+    }
+
+    @Override
+    public void rejectFriend(Integer receiverId,Integer senderId) {
+        Friend request = friendRepository
+                .findByUserIdAndFriendId(senderId, receiverId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy lời mời" + "Người gửi: "+senderId + "Người nhận :"+receiverId));
+
+        if (request.getStatus() != FriendshipStatus.PENDING)
+            throw new RuntimeException("Không thể từ chối");
+
+        request.setStatus(FriendshipStatus.REJECTED);
+        friendRepository.save(request);
+    }
+
+    @Override
+    @Transactional
+    public void unfriend(Integer receiverId, Integer senderId) {
+        friendRepository.deleteByUserIdAndFriendId(receiverId, senderId);
+        friendRepository.deleteByUserIdAndFriendId(senderId, receiverId);
+    }
+}
