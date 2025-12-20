@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IFriendRepository extends JpaRepository<Friend, Integer> {
@@ -29,4 +30,24 @@ public interface IFriendRepository extends JpaRepository<Friend, Integer> {
         and f.friend.id = :friendId
     """)
     int deleteByUserIdAndFriendId(Integer userId, Integer friendId);
+    @Query("""
+    select f from Friend f
+    where (
+        (f.user.id = :userId)
+        or
+        (f.friend.id = :userId)
+    )
+    and f.status = 'ACCEPTED'
+""")
+    List<Friend> findAcceptedFriends(Integer userId);
+
+    @Query("""
+    select f from Friend f
+    where (
+        (f.user.id = :u1 and f.friend.id = :u2)
+        or
+        (f.user.id = :u2 and f.friend.id = :u1)
+    )
+""")
+    Optional<Friend> findBetweenUsers(Integer u1, Integer u2);
 }

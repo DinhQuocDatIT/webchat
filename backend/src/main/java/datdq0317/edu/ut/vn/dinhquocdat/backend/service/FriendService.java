@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -62,25 +63,17 @@ public class FriendService implements IFriendService {
     }
 
     @Override
-    public void acceptFriend(Integer receiverId,Integer senderId) {
+    public void acceptFriend(Integer receiverId, Integer senderId) {
         Friend request = friendRepository
                 .findByUserIdAndFriendId(senderId, receiverId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy lời mời"));
-        if (request.getStatus() != FriendshipStatus.PENDING){
+
+        if (request.getStatus() != FriendshipStatus.PENDING) {
             throw new RuntimeException("Lời mời không hợp lệ");
         }
+
         request.setStatus(FriendshipStatus.ACCEPTED);
         friendRepository.save(request);
-        friendRepository.findByUserIdAndFriendId(receiverId, senderId)
-                .orElseGet(() -> {
-                    Friend reverse = new Friend();
-                    reverse.setUser(userService.findById(receiverId).orElseThrow());
-                    reverse.setFriend(userService.findById(senderId).orElseThrow());
-                    reverse.setStatus(FriendshipStatus.ACCEPTED);
-                    return friendRepository.save(reverse);
-                });
-
-
     }
 
     @Override
@@ -98,8 +91,20 @@ public class FriendService implements IFriendService {
 
     @Override
     @Transactional
-    public void unfriend(Integer receiverId, Integer senderId) {
-        friendRepository.deleteByUserIdAndFriendId(receiverId, senderId);
-        friendRepository.deleteByUserIdAndFriendId(senderId, receiverId);
+    public void unfriend(Integer u1, Integer u2) {
+        Friend f = friendRepository.findBetweenUsers(u1, u2)
+                .orElseThrow(() -> new RuntimeException("Không phải bạn bè"));
+
+        friendRepository.delete(f);
+    }
+
+    @Override
+    public Optional<Friend> findBetweenUsers(Integer u1, Integer u2) {
+        return friendRepository.findBetweenUsers(u1, u2);
+    }
+
+    @Override
+    public List<Friend> findAcceptedFriends(Integer userId) {
+        return friendRepository.findAcceptedFriends(userId);
     }
 }

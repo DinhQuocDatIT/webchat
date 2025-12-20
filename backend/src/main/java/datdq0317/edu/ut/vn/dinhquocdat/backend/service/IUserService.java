@@ -1,7 +1,9 @@
 package datdq0317.edu.ut.vn.dinhquocdat.backend.service;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Role;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IUserService {
@@ -21,4 +23,5 @@ public interface IUserService {
 
     void updateRole(Integer userId, Role role);
 
+    List<DetailFriendRequest> listFriend(Integer userId);
 }

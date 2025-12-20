@@ -1,20 +1,26 @@
 package datdq0317.edu.ut.vn.dinhquocdat.backend.controller;
 
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.FriendRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.security.UserDetailsImpl;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.service.IFriendService;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.service.IUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/friends")
 public class FriendController {
     @Autowired
    private IFriendService friendService;
+    @Autowired
+    private IUserService userService;
 
     @PostMapping("/add/{id}")
     public ResponseEntity<?> addFriend(
@@ -53,5 +59,12 @@ public class FriendController {
         UserDetailsImpl me = (UserDetailsImpl) authentication.getPrincipal();
         friendService.unfriend(me.getId(), id);
         return ResponseEntity.ok("Hủy kết bạn thành công");
+    }
+    @GetMapping("/getfriend")
+    public List<DetailFriendRequest> getFriend(Authentication authentication){
+        UserDetailsImpl me = (UserDetailsImpl) authentication.getPrincipal();
+        List<DetailFriendRequest> friends = userService.listFriend(me.getId());
+        System.out.println("friends"+friends.size());
+        return friends;
     }
 }
