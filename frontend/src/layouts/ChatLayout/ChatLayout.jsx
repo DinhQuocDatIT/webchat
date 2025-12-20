@@ -3,22 +3,32 @@ import ChatMain from "./ChatMain/ChatMain";
 import ConversationSidebar from "./ConversationSidebar/ConversationSidebar";
 import SideNavigation from "./SideNavigation/SideNavigation";
 
-function ChatLayout() {
+function ChatLayout({ leftTab, setLeftTab, selectedId, setSelectedId }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.sideNavigation}>
-        <SideNavigation />
+        <SideNavigation
+          leftTab={leftTab}
+          setLeftTab={setLeftTab}
+        />
       </div>
 
       <div className={styles.conversationSidebar}>
-        <ConversationSidebar />
+        <ConversationSidebar
+          leftTab={leftTab}
+          setSelectedId={setSelectedId}
+        />
       </div>
 
       <div className={styles.chatMain}>
-        <ChatMain />
+        <ChatMain
+          leftTab={leftTab}
+          selectedId={selectedId}
+        />
       </div>
     </div>
   );
 }
+
 
 export default ChatLayout;

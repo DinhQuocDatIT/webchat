@@ -1,17 +1,20 @@
-.wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 10px;
-    transition: all 0.2s ease;
-    
+.wrapper {
+  all: unset;                /* 🔥 reset toàn bộ style mặc định */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
+
 .wrapper svg {
   font-size: 25px;
   color: var(--p-white);
 }
-.wrapper:focus,
-.wrapper:hover{
-    background-color: rgba(60, 60, 60, 0.2);
-    border-radius: 8px;
+
+.wrapper:hover,
+.wrapper:focus-visible {
+  background-color: rgba(60, 60, 60, 0.2);
+  border-radius: 8px;
 }

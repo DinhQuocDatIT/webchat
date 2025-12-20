@@ -1,0 +1,30 @@
+.item{
+    display: flex;
+    padding: 15px 10px;
+    align-items: center;
+    background-color:var(--p-white);
+    gap: 5px;
+    text-decoration: none; 
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+.item:hover{
+    background-color: var(--p-hover);
+}
+.item:focus-visible {
+  background-color: var(--p-50);
+}
+.item svg{
+    font-size: 15px;
+    color: rgb(81, 81, 81);
+}
+.item span{
+    color: rgb(81, 81, 81);
+}
+.active {
+  background-color: var(--p-50);
+}
+
+.active span {
+  font-weight: 500;
+}

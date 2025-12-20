@@ -1,6 +1,15 @@
-import { Link } from "react-router";
 import styles from "./NavItem.module.css";
-function NavItem({ to, children }) {
-  return <Link to={to} className={styles.wrapper}>{children}</Link>;
+
+function NavItem({ active, onClick, children }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`${styles.wrapper} ${active ? styles.active : ""}`}
+    >
+      {children}
+    </button>
+  );
 }
+
 export default NavItem;

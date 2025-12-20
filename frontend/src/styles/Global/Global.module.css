@@ -2,7 +2,9 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+html, body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
 html,
 body,
 div,
@@ -142,7 +144,7 @@ table {
 
   /* Primary colors */
   --p-20: hsl(213, 100%, 98%);
-  --p-50: #eefffd;
+  --p-50: #d5f4ef;
   --p-100: #c5fffb;
   --p-200: #8bfff8;
   --p-300: #4afef4;
@@ -157,6 +159,9 @@ table {
   --p-950: #003135;
   /* màu nền background */
   --p-white:#ffffff;
+
+  /*màu hover*/
+    --p-hover:#f0f0f0;
   /*   border đường viên*/
   --p-solid-boder :1px solid rgb(225, 225, 225);
 

@@ -1,0 +1,146 @@
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../../../assets/background_uth.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.container {
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  background-color: var(--p-white);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
+    rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+}
+/* content: "";
+    position: absolute;
+    inset: 0px;
+    background: rgba(0, 0, 0, 0.23);
+    z-index: 1; */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: var(--h2-font-size);
+  line-height: var(--h2-line-height);
+  font-weight: 600;
+  color: rgb(218, 28, 45);
+  gap: 10px;
+}
+.header img {
+  width: 300px;
+  height: auto;
+}
+.introduce {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1px;
+}
+.title {
+  font-size: var(--h2-font-size);
+  line-height: var(--h2-line-height);
+  font-weight: 600;
+  color: rgb(241, 46, 62);
+  text-transform: uppercase;
+}
+.subtitle {
+  font-size: var(--p-font-size);
+  line-height: var(--p-line-height);
+  color: rgb(86, 86, 86);
+}
+.formLogin {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.formGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 500;
+  color: rgb(86, 86, 86);
+}
+.formGroup .inputGroup {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.inputGroup div {
+  outline: none;
+  padding: 12px;
+  border-top: var(--p-solid-boder);
+  border-bottom: var(--p-solid-boder);
+  border-left: var(--p-solid-boder);
+  background-color: rgb(246, 246, 246);
+}
+.inputGroup div svg {
+  font-size: var(--p-font-size);
+}
+.inputGroup input {
+  flex: 1;
+  outline: none;
+  padding: 12px;
+  font-size: var(--p-font-size);
+  border: var(--p-solid-boder);
+  border-radius: 0px 8px 8px 0px;
+}
+
+.submit {
+  margin-top: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: var(--p-700);
+  color: var(--p-white);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: var(--p-font-size);
+  line-height: var(--p-line-height);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
+    rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+  transition: all 0.3s ease;
+}
+.submit:hover {
+  background-color: var(--p-600);
+}
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  color: rgb(86, 86, 86);
+}
+.register {
+  color: rgb(86, 86, 86);
+}
+
+.register a {
+  color: var(--p-700);
+  text-decoration: none;
+}
+.author span {
+  color: rgb(86, 86, 86);
+}
+.author {
+  text-decoration: none;
+  color: var(--p-700);
+}
