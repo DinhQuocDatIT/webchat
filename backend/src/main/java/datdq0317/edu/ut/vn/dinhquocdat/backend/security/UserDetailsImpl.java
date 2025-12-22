@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 @Data
 public class UserDetailsImpl implements UserDetails {
-    private int id;
+    private Integer id;
     private String fullName;
     private String username;
     private String email;
@@ -23,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl() {
     }
 
-    public UserDetailsImpl(int id,String fullName, String username, String email, String password, Role role) {
+    public UserDetailsImpl(Integer id,String fullName, String username, String email, String password, Role role) {
         this.id = id;
         this.fullName = fullName;
         this.username = username;

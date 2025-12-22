@@ -3,6 +3,7 @@ package datdq0317.edu.ut.vn.dinhquocdat.backend.controller;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.LoginRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.SignupRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.JwtResponse;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.UserResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Role;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.security.UserDetailsImpl;
@@ -54,21 +55,27 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest ) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken
-                        (loginRequest.getUsername(), loginRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
         );
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
         String jwt = jwtUtils.generateToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        UserResponse userResponse = new UserResponse(
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                userDetails.getFullName(),
+                userDetails.getRole().name()
+        );
+
         return ResponseEntity.ok(
-                new JwtResponse(
-                        userDetails.getId(),
-                        userDetails.getFullName(),
-                        jwt,
-                        userDetails.getEmail(),
-                        userDetails.getUsername(),
-                        userDetails.getRole().name()
-                )
+                new JwtResponse(jwt, "Bearer", userResponse)
         );
     }
 }

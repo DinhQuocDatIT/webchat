@@ -22,6 +22,4 @@ public interface IUserService {
     void updatePassword(Integer userId, String encodedPassword);
 
     void updateRole(Integer userId, Role role);
-
-    List<DetailFriendRequest> listFriend(Integer userId);
 }

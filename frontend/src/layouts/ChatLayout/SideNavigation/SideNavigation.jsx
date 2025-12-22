@@ -4,10 +4,19 @@ import {
   faGear,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styles from "./SideNavigation.module.css";
 import avatardefault from "../../../assets/avatar-default.jpg";
 import NavItem from "../../../components/NavItem/NavItem";
+import { logout } from "../../../api/auth";
 function SideNavigation({ leftTab, setLeftTab }) {
+  const navigate = useNavigate();
+
+   const handleLogout = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.avatar}>
@@ -18,18 +27,23 @@ function SideNavigation({ leftTab, setLeftTab }) {
           <NavItem
             active={leftTab === "chat"}
             onClick={() => setLeftTab("chat")}
-          > <FontAwesomeIcon icon={faMessage} /></NavItem>
+          >
+            {" "}
+            <FontAwesomeIcon icon={faMessage} />
+          </NavItem>
 
           <NavItem
             active={leftTab === "contacts"}
             onClick={() => setLeftTab("contacts")}
-          ><FontAwesomeIcon icon={faAddressBook} /></NavItem>
+          >
+            <FontAwesomeIcon icon={faAddressBook} />
+          </NavItem>
         </div>
         <div className={styles.menuBottom}>
-          <NavItem to="/messages">
+          <NavItem>
             <FontAwesomeIcon icon={faGear} />
           </NavItem>
-          <NavItem to="/messages">
+          <NavItem onClick={handleLogout}>
             <FontAwesomeIcon icon={faArrowRightFromBracket} />
           </NavItem>
         </div>

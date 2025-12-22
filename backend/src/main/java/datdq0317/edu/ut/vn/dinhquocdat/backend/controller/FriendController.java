@@ -18,9 +18,7 @@ import java.util.List;
 @RequestMapping("/api/friends")
 public class FriendController {
     @Autowired
-   private IFriendService friendService;
-    @Autowired
-    private IUserService userService;
+    private IFriendService friendService;
 
     @PostMapping("/add/{id}")
     public ResponseEntity<?> addFriend(
@@ -63,7 +61,7 @@ public class FriendController {
     @GetMapping("/getfriend")
     public List<DetailFriendRequest> getFriend(Authentication authentication){
         UserDetailsImpl me = (UserDetailsImpl) authentication.getPrincipal();
-        List<DetailFriendRequest> friends = userService.listFriend(me.getId());
+        List<DetailFriendRequest> friends = friendService.listFriend(me.getId());
         System.out.println("friends"+friends.size());
         return friends;
     }

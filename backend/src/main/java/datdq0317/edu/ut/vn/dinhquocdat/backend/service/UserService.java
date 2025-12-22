@@ -18,9 +18,6 @@ public class UserService implements IUserService {
     @Autowired
     private IUserRepository userRepository;
 
-    @Autowired
-    private IFriendService friendService;
-
     @Override
     public Optional<User> findById(Integer id) {
         return userRepository.findById(id);
@@ -67,20 +64,5 @@ public class UserService implements IUserService {
         userRepository.save(user);
     }
 
-    @Override
-    public List<DetailFriendRequest> listFriend(Integer userId) {
-        List<Friend> relations = friendService.findAcceptedFriends(userId);
-        List<DetailFriendRequest> friends = new ArrayList<>();
-        for (Friend f : relations) {
-            if (f.getUser().getId().equals(userId)) {
-                friends.add(new DetailFriendRequest(f.getFriend()));
-            }
-            else {
-                friends.add(new DetailFriendRequest(f.getUser()));
-            }
-        }
-
-        return friends;
-    }
 
 }

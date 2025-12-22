@@ -16,16 +16,45 @@
 .findFriend:focus {
   border: 1px solid var(--p-700);
 }
-.add {
+
+/* nút thêm */
+
+.wrapperButton{
+  border: none;
+  outline: none;
   padding: 10px;
   border-radius: 4px;
   color: var(--p-700);
   transition: all 0.3s ease;
+  background-color: var(--p-white);
 }
-.add:hover {
+.wrapperButton:hover {
   background-color: var(--p-hover);
 }
-.add:focus,
-.add:hover {
+.wrapperButton:focus,
+.wrapperButton:hover {
   background-color: var(--p-hover);
+}
+
+
+/*  hiển thị form */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.2); /* nền mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* nội dung form */
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
 }
