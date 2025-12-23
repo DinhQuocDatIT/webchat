@@ -1,0 +1,41 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 8px;
+}
+.wrapper img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.information .username {
+  font-size: 13px;
+  color: rgb(73, 73, 73);
+}
+.information .fullName {
+  font-size: var(--p-font-size);
+}
+.action {
+  margin-left: auto;
+  display: flex;
+  gap: 5px;
+}
+.action button {
+  outline: none;
+  border: 1px solid var(--p-700);
+  background-color: white;
+  border-radius: 3px;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+}
+.action button:hover {
+  background-color: var(--p-700);
+  color: white;
+}

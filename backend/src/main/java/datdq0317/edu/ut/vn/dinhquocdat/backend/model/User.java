@@ -36,7 +36,8 @@ public class User {
     // Friend list 2 chiều
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Friend> friends = new HashSet<>();
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Notifications> notifications = new HashSet<>();
     public User(String username, String password, String email, String fullName) {
         this.username = username;
         this.password = password;

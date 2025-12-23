@@ -13,7 +13,7 @@ export const login = async (data) => {
 };
 
 export const register = (data) => {
-  return axiosInstance.post("/auth/register", data);
+  return axiosInstance.post("/auth/signup", data);
 };
 
 export const logout = () => {

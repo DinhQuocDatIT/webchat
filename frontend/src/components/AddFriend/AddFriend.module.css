@@ -53,8 +53,11 @@
 
 /* nội dung form */
 .modalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  min-width: 300px;
+  min-width: 400px;
+  border-radius: 3px;
 }

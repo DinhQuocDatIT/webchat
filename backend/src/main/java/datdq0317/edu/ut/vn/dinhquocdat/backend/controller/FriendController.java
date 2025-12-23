@@ -2,6 +2,7 @@ package datdq0317.edu.ut.vn.dinhquocdat.backend.controller;
 
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.FriendRequest;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.FriendStatusResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.security.UserDetailsImpl;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.service.IFriendService;
@@ -65,4 +66,13 @@ public class FriendController {
         System.out.println("friends"+friends.size());
         return friends;
     }
+    @GetMapping("/friend-status/{id}")
+    public FriendStatusResponse friendStatus(
+            @PathVariable Integer id,
+            Authentication authentication
+    ) {
+        UserDetailsImpl me = (UserDetailsImpl) authentication.getPrincipal();
+        return friendService.friendStatus(me.getId(), id);
+    }
+
 }

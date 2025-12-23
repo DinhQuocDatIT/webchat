@@ -1,5 +1,6 @@
 package datdq0317.edu.ut.vn.dinhquocdat.backend.service;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.UserResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Friend;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Role;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
@@ -64,5 +65,18 @@ public class UserService implements IUserService {
         userRepository.save(user);
     }
 
+    @Override
+    public List<UserResponse> findAll() {
+        List<User> users = userRepository.findAll();
+        List<UserResponse> userResponses = new ArrayList<>();
+        for (User user : users) {
+            userResponses.add(new UserResponse(user));
+        }
+        return userResponses;
+    }
+    @Override
+    public Optional<UserResponse> findByUsernameResponse(String username) {
+        return userRepository.findByUsername(username).map(UserResponse::new);
+    }
 
 }

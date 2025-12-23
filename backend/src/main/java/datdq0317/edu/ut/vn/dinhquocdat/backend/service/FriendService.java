@@ -1,6 +1,7 @@
 package datdq0317.edu.ut.vn.dinhquocdat.backend.service;
 
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.FriendStatusResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Friend;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.FriendshipStatus;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
@@ -124,4 +125,42 @@ public class FriendService implements IFriendService {
 
         return friends;
     }
+
+    @Override
+    public FriendStatusResponse friendStatus(Integer meId, Integer otherId) {
+
+        Optional<Friend> opt = friendRepository.findBetweenUsers(meId, otherId);
+
+        if (opt.isEmpty()) {
+            return new FriendStatusResponse("NONE", "NONE", true);
+        }
+
+        Friend f = opt.get();
+
+        if (f.getStatus() == FriendshipStatus.PENDING) {
+            if (f.getUser().getId().equals(meId)) {
+                return new FriendStatusResponse("PENDING", "OUTGOING", false);
+            } else {
+                return new FriendStatusResponse("PENDING", "INCOMING", false);
+            }
+        }
+
+        if (f.getStatus() == FriendshipStatus.REJECTED) {
+            if (f.getUser().getId().equals(meId)) {
+                // mình bị từ chối
+                return new FriendStatusResponse("REJECTED", "OUTGOING", false);
+            } else {
+                // mình là người từ chối → được gửi lại
+                return new FriendStatusResponse("REJECTED", "INCOMING", true);
+            }
+        }
+
+        if (f.getStatus() == FriendshipStatus.ACCEPTED) {
+            return new FriendStatusResponse("ACCEPTED", "NONE", false);
+        }
+
+        return new FriendStatusResponse("NONE", "NONE", true);
+    }
+
+
 }

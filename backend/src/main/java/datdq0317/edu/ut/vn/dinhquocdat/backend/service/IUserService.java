@@ -1,5 +1,6 @@
 package datdq0317.edu.ut.vn.dinhquocdat.backend.service;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.UserResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Role;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
 
@@ -22,4 +23,6 @@ public interface IUserService {
     void updatePassword(Integer userId, String encodedPassword);
 
     void updateRole(Integer userId, Role role);
+    List<UserResponse> findAll();
+    Optional<UserResponse> findByUsernameResponse(String username);
 }

@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { useState } from "react";
 
 import styles from "./AddFriend.module.css";
+import SearchFriendForm from "../SearchFriendForm/SearchFriendForm";
 function AddFriend() {
   const [showFormAddFriend, setShowFormAddFriend] = useState(false);
   const handleAddFriend = () => {
@@ -11,10 +12,9 @@ function AddFriend() {
   };
   const modal = showFormAddFriend
     ? createPortal(
-        <div className={styles.modalOverlay}>
+        <div className={styles.modalOverlay} >
           <div className={styles.modalContent}>
-            <p>Form tìm kiếm bạn bè ở đây</p>
-            <button onClick={handleAddFriend}>Đóng</button>
+           <SearchFriendForm onClick={handleAddFriend}/>
           </div>
         </div>,
         document.body
