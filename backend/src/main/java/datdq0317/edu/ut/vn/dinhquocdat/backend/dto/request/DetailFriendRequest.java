@@ -12,10 +12,14 @@ public class DetailFriendRequest {
     private Integer id;
     private String username;
     private String fullName;
+    private String avatar;
+    private String status;
 
     public DetailFriendRequest(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.fullName = user.getFullName();
+        this.avatar = user.getAvatar();
+        this.status = user.getStatus().name();
     }
 }

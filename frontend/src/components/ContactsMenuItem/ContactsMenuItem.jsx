@@ -1,17 +1,16 @@
 import { NavLink } from "react-router-dom";
 import styles from "./ContactsMenuItem.module.css";
 
-function ContactsMenuItem({ to, icon, label }) {
+function ContactsMenuItem({ icon, label, active, setSelectedId }) {
+  const handleSubmit = () => {
+    setSelectedId(active);
+  };
+
   return (
-    <NavLink
-      to={to}
-      className={({ isActive }) =>
-        `${styles.item} ${isActive ? styles.active : ""}`
-      }
-    >
+    <button onClick={handleSubmit} type="button" className={`${styles.item}`}>
       {icon}
       <span>{label}</span>
-    </NavLink>
+    </button>
   );
 }
 

@@ -4,6 +4,7 @@ import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.UserResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Friend;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Role;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.model.UserStatus;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.repository.IFriendRepository;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +79,16 @@ public class UserService implements IUserService {
     public Optional<UserResponse> findByUsernameResponse(String username) {
         return userRepository.findByUsername(username).map(UserResponse::new);
     }
+
+    @Override
+    public UserResponse connect(UserResponse response) {
+        Optional<User> user = userRepository.findByUsername(response.getUsername());
+      user.ifPresent(u ->{
+          u.setStatus(UserStatus.ONLINE);
+          userRepository.save(u);
+      });
+        return new UserResponse(user.get());
+    }
+
 
 }

@@ -19,21 +19,24 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
 
     private Role role;
-
+    private String avatar;
+    private String status;
     public UserDetailsImpl() {
     }
 
-    public UserDetailsImpl(Integer id,String fullName, String username, String email, String password, Role role) {
-        this.id = id;
-        this.fullName = fullName;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.role = role;
+    public UserDetailsImpl(User user) {
+       this.id = user.getId();
+       this.fullName = user.getFullName();
+       this.username = user.getUsername();
+       this.email = user.getEmail();
+       this.password = user.getPassword();
+       this.role = user.getRole();
+       this.avatar = user.getAvatar();
+       this.status = user.getStatus().name();
     }
 
     public static  UserDetailsImpl build(User user) {
-        return new UserDetailsImpl(user.getId(),user.getFullName(), user.getUsername(), user.getEmail(), user.getPassword(), user.getRole());
+        return new UserDetailsImpl(user);
 
     }
     @Override

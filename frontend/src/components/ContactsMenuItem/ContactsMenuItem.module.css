@@ -1,4 +1,5 @@
-.item{
+/* .item{
+
     display: flex;
     padding: 15px 10px;
     align-items: center;
@@ -27,4 +28,24 @@
 
 .active span {
   font-weight: 500;
+} */
+.item {
+  display: flex;
+  gap: 10px;
+  outline: none;
+  border: none;
+  padding: 18px 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  background-color: white;
+  font-size: var(--p-font-size);
+  color: rgb(73, 73, 73);
+}
+.item:hover {
+  background-color: rgb(241, 241, 241);
+  border-radius: 3px;
+}
+.item:focus {
+  border-radius: 3px;
+  background-color: var(--p-50);
 }

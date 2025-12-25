@@ -10,7 +10,7 @@
 }
 
 .conversationSidebar {
-  width: 300px;
+  width: 350px;
   border-right: var(--p-solid-boder);
   background-color: var(--p-white);
 }

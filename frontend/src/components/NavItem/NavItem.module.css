@@ -1,11 +1,12 @@
 .wrapper {
-  all: unset;                /* 🔥 reset toàn bộ style mặc định */
+  all: unset; /* 🔥 reset toàn bộ style mặc định */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 12px 10px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .wrapper svg {
@@ -15,6 +16,10 @@
 
 .wrapper:hover,
 .wrapper:focus-visible {
+  background-color: rgba(60, 60, 60, 0.2);
+  border-radius: 8px;
+}
+.wrapper:focus {
   background-color: rgba(60, 60, 60, 0.2);
   border-radius: 8px;
 }

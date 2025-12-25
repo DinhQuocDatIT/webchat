@@ -10,36 +10,37 @@ import styles from "./ContactsSidebar.module.css";
 
 const CONTACTS_MENU = [
   {
-    to: "friends",
+    active:"myFriends",
     label: "Danh sách bạn bè",
     icon: faUser,
   },
   {
-    to: "groups",
+    active:"groupAndCommunityList",
     label: "Danh sách nhóm và cộng đồng",
     icon: faUsers,
   },
   {
-    to: "friend-requests",
+    active:"friendRequestList",
     label: "Lời mời kết bạn",
     icon: faUserPlus,
   },
   {
-    to: "group-invites",
+    active:"groupAndCommunityInviteList",
     label: "Lời mời vào nhóm và cộng đồng",
     icon: faUserGroup,
   },
 ];
 
-function ContactsSidebar() {
+function ContactsSidebar({setSelectedId}) {
   return (
     <div className={styles.wrapper}>
       {CONTACTS_MENU.map((item) => (
         <ContactsMenuItem
-          key={item.to}
-          to={item.to}
+          key={item.active}
           icon={<FontAwesomeIcon icon={item.icon} />}
           label={item.label}
+          active ={item.active}
+          setSelectedId={ setSelectedId}
         />
       ))}
     </div>

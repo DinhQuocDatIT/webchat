@@ -28,7 +28,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return request.getServletPath().startsWith("/api/auth/");
+        String path = request.getServletPath();
+        // Cho phép các endpoint không cần xác thực
+        return path.startsWith("/api/auth/") || path.startsWith("/ws/");
     }
     // Tự động chạy cho mọi request
     @Override

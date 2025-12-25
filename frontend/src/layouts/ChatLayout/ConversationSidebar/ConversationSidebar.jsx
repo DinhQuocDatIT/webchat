@@ -1,5 +1,6 @@
 import AddFriend from "../../../components/AddFriend/AddFriend";
 import ContactsSidebar from "../../../components/ContactsSidebar/ContactsSidebar";
+import ListFriend from "../../../components/ListFriend/ListFriend";
 import styles from "./ConversationSidebar.module.css";
 
 function ConversationSidebar({ leftTab, setSelectedId }) {
@@ -11,11 +12,11 @@ function ConversationSidebar({ leftTab, setSelectedId }) {
 
       <div className={styles.content}>
         {leftTab === "chat" && (
-          <div>1232131</div>
+          <ListFriend/>
         )}
 
         {leftTab === "contacts" && (
-          <ContactsSidebar onSelect={setSelectedId} />
+          <ContactsSidebar setSelectedId={setSelectedId}/>
         )}
       </div>
     </div>

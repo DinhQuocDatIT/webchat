@@ -28,7 +28,7 @@ function SideNavigation({ leftTab, setLeftTab }) {
             active={leftTab === "chat"}
             onClick={() => setLeftTab("chat")}
           >
-            {" "}
+        
             <FontAwesomeIcon icon={faMessage} />
           </NavItem>
 

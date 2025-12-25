@@ -5,10 +5,9 @@ import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +27,11 @@ public class UserController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+    @MessageMapping("/user/connect")//người dùng gửi tới /app
+    @SendTo("/topic/active")//client nhận message từ /toppic
+    public UserResponse connect(@RequestBody UserResponse userResponse) {
+        return userService.connect(userResponse);
 
+}
 
 }

@@ -30,6 +30,9 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    private String avatar;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status =UserStatus.OFFLINE;
     @Enumerated(EnumType.STRING)
     private Role role;
 

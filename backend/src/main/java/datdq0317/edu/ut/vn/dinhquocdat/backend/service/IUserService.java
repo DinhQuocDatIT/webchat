@@ -25,4 +25,5 @@ public interface IUserService {
     void updateRole(Integer userId, Role role);
     List<UserResponse> findAll();
     Optional<UserResponse> findByUsernameResponse(String username);
+    UserResponse connect(UserResponse response);
 }
