@@ -1,3 +1,4 @@
+import MyFriends from "../../../components/ConTacts/MyFriends/MyFriends";
 import styles from "./ChatMain.module.css";
 function ChatMain({ leftTab, selectedId }) {
   if (leftTab === "chat") {
@@ -5,7 +6,7 @@ function ChatMain({ leftTab, selectedId }) {
   } else {
     return (
       <div className={styles.wrapper}>
-        {selectedId === "myFriends" && <div>myFriends</div>}
+        {selectedId === "myFriends" && <MyFriends/>}
         {selectedId == "groupAndCommunityList" && (
           <div>groupAndCommunityList</div>
         )}
