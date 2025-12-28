@@ -1,10 +1,12 @@
 package datdq0317.edu.ut.vn.dinhquocdat.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,7 +30,9 @@ public class Conversation {
     private Set<User> participants = new HashSet<>();
 
     private LocalDateTime lastMessageAt;
-
+    @OneToMany(mappedBy = "conversation", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Message> messages;
     @PrePersist
     protected void onCreate() {
         lastMessageAt = LocalDateTime.now();

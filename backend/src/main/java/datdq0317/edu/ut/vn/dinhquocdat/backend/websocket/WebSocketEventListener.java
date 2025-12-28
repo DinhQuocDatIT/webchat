@@ -69,7 +69,7 @@ public class WebSocketEventListener {
             userRepository.save(user);
 
             messagingTemplate.convertAndSend(
-                    "/topic/active",
+                    "/topic/active/"+ username,
                     new UserStatusMessage(username, status.name())
             );
         });

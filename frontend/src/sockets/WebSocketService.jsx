@@ -5,7 +5,7 @@ import { AuthService } from "../services/auth.service";
 
 class WebSocketService {
   client = null;
-
+  subscriptions = {};
   connect(onConnect) {
     this.client = new Client({
       webSocketFactory: () => new SockJS("http://localhost:8080/ws"),
@@ -24,7 +24,12 @@ class WebSocketService {
       callback(JSON.parse(msg.body))
     );
   }
-
+  unsubscribe(topic) {
+    if (this.subscriptions[topic]) {
+      this.subscriptions[topic].unsubscribe();
+      delete this.subscriptions[topic];
+    }
+  }
   send(destination, body) {
     if (!this.client || !this.client.connected) return;
 

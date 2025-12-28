@@ -1,6 +1,7 @@
 package datdq0317.edu.ut.vn.dinhquocdat.backend.controller;
 
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.ConversationResponse;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.MessageResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Conversation;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.security.UserDetailsImpl;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.service.IConversationService;
@@ -29,5 +30,11 @@ public class ConversationController {
             Authentication authentication) {
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         return  conversationService.getOrCreateConversation(user.getId(),id);
+    }
+    @GetMapping("/content-conversation/{conversationId}")
+    public List<MessageResponse> getConversationMessages(Authentication authentication, @PathVariable Long conversationId) {
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        return conversationService.getcontentConversation(user.getId(),conversationId);
+
     }
 }

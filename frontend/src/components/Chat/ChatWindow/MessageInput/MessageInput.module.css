@@ -1,0 +1,46 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: var(--p-white);
+  border-top: var(--p-solid-boder);
+  display: flex;
+  flex-direction: column;
+}
+.action {
+  width: 100%;
+  flex: 1;
+  background-color: var(--p-white);
+  border-bottom: var(--p-solid-boder);
+}
+.contentInput {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--p-white);
+}
+.contentInput input {
+  background-color: var(--p-white);
+  height: 100%;
+  flex: 1;
+  padding: 10px 12px;
+  outline: none;
+  border: none;
+}
+.contentInput button {
+  cursor: pointer;
+  background-color: var(--p-white);
+  width: 66px;
+  height: 100%;
+  outline: none;
+  border: none;
+  transition: all 0.3s ease;
+}
+.contentInput button:hover {
+  background-color: var(--p-hover);
+}
+.contentInput button svg {
+  font-size: 22px;
+  color: var(--p-700);
+}
