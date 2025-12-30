@@ -4,7 +4,6 @@ import { AuthService } from "../../services/auth.service";
 function Conversation({ conversation, setSelectedId }) {
   const currentUser = AuthService.getUser();
   const friend = conversation.participants.find((p) => p.id !== currentUser.id);
-  console.log(friend);
   const handleSubmit = () => {
     setSelectedId(conversation);
   };

@@ -50,4 +50,17 @@ public interface IFriendRepository extends JpaRepository<Friend, Integer> {
     )
 """)
     Optional<Friend> findBetweenUsers(Integer u1, Integer u2);
+
+    @Query("""
+        select  f from Friend  f 
+        where (f.friend.id = :userId)
+                and (f.status='PENDING')
+""")
+    List<Friend> getIncomingFriendRequests(Integer userId);
+    @Query("""
+    select  f from Friend  f 
+        where  (f.user.id = :userId )
+            and (f.status = "PENDING")
+    """)
+    List<Friend> getOutgoingFriendRequests(Integer userId);
 }

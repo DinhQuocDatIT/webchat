@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import avatardefault from "../../../../assets/avatar-default.jpg";
 import styles from "./ChatHeader.module.css";
 import WebSocketService from "../../../../sockets/WebSocketService";
+import Avatar from "../../../Avatar/Avatar";
 
 function ChatHeader({ friend }) {
   const [statusFriend, setStatusFriend] = useState(friend.status);
@@ -23,10 +24,7 @@ function ChatHeader({ friend }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.friendInfor}>
-        <img
-          src={friend.avatar || avatardefault}
-          alt={friend.fullName}
-        />
+        <Avatar userid={friend.id} />
         <div className={styles.infor}>
           <p className={styles.name}>{friend.fullName}</p>
           {statusFriend === "ONLINE" ? (

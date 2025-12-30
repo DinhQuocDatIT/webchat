@@ -6,3 +6,6 @@ export const getUsers = () => {
 export const getUserByUsername = (username) => {
   return axiosInstance.get(`/users/by-username`, { params: { username } });
 };
+export const getUsersById = (userId) => {
+  return axiosInstance.get(`/users/${userId}`);
+};

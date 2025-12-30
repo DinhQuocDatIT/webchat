@@ -2,7 +2,10 @@ package datdq0317.edu.ut.vn.dinhquocdat.backend.controller;
 
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.FriendRequest;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.FriendResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.FriendStatusResponse;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.IncomingFriendRequestResponse;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.OutgoingFriendRequestResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.security.UserDetailsImpl;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.service.IFriendService;
@@ -73,6 +76,17 @@ public class FriendController {
     ) {
         UserDetailsImpl me = (UserDetailsImpl) authentication.getPrincipal();
         return friendService.friendStatus(me.getId(), id);
+    }
+    @GetMapping("/friend-incoming")
+    public List<IncomingFriendRequestResponse> getIncomingFriendRequests(Authentication authentication){
+        UserDetailsImpl me = (UserDetailsImpl) authentication.getPrincipal();
+        return friendService.getIncomingFriendRequests(me.getId());
+    }
+
+    @GetMapping("/friend-outgoing")
+    public List<OutgoingFriendRequestResponse> getOutgoingFriendRequests(Authentication authentication){
+        UserDetailsImpl me = (UserDetailsImpl) authentication.getPrincipal();
+        return friendService.getOutgoingFriendRequests(me.getId());
     }
 
 }

@@ -29,6 +29,12 @@ public class UserController {
     public List<UserResponse> getUsers() {
         return userService.findAll();
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Integer id) {
+        return userService.findById(id)
+                .map(user -> ResponseEntity.ok(new UserResponse(user)))
+                .orElse(ResponseEntity.notFound().build());
+    }
     @GetMapping("/by-username")
     public ResponseEntity<UserResponse> getUserByUsername(@RequestParam String username) {
         return userService.findByUsernameResponse(username)

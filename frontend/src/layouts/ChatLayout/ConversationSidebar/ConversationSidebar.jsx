@@ -12,12 +12,10 @@ function ConversationSidebar({ leftTab, setSelectedId }) {
       </div>
 
       <div className={styles.content}>
-        {leftTab === "chat" && (
-          <FriendList setSelectedId={setSelectedId}/>
-        )}
+        {leftTab === "chat" && <FriendList setSelectedId={setSelectedId} />}
 
         {leftTab === "contacts" && (
-          <ContactsSidebar setSelectedId={setSelectedId}/>
+          <ContactsSidebar setSelectedId={setSelectedId} />
         )}
       </div>
     </div>

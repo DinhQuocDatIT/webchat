@@ -18,3 +18,9 @@ export const rejectFriend = (idUser) => {
 export const getFriend = () => {
   return axiosInstance.get("/friends/getfriend");
 };
+export const getFriendIncoming = () => {
+  return axiosInstance.get("/friends/friend-incoming");
+};
+export const getFriendOutgoing =() =>{
+  return axiosInstance.get("/friends/friend-outgoing");
+}

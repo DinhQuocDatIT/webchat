@@ -24,6 +24,7 @@ function ChatLayout({ leftTab, setLeftTab, selectedId, setSelectedId}) {
         <ChatMain
           leftTab={leftTab}
           selectedId={selectedId}
+          setSelectedId={setSelectedId}
         />
       </div>
     </div>

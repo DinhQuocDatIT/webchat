@@ -4,6 +4,7 @@ import WebSocketService from "../../../../sockets/WebSocketService";
 import { use, useEffect, useState } from "react";
 import { getContentConversation } from "../../../../api/conversations";
 import { AuthService } from "../../../../services/auth.service";
+import Avatar from "../../../Avatar/Avatar";
 
 function MessageList({ conversation }) {
   const currentUser = AuthService.getUser();
@@ -37,9 +38,6 @@ function MessageList({ conversation }) {
         if (message.senderId === currentUser.id) {
           return (
             <div className={styles.sender} key={message.id}>
-              <div className={styles.avatar}>
-                <img src={avatarDefault} alt="avatar" />
-              </div>
               <div className={styles.messageContent}>
                 <p className={styles.content}>{message.content}</p>
                 <p className={styles.time}>
@@ -51,9 +49,7 @@ function MessageList({ conversation }) {
         } else {
           return (
             <div className={styles.receiver} key={message.id}>
-              <div className={styles.avatar}>
-                <img src={avatarDefault} alt="avatar" />
-              </div>
+               <Avatar userid ={message.senderId}/>
               <div className={styles.messageContent}>
                 <p className={styles.name}>{message.senderName}</p>
                 <p className={styles.content}>{message.content}</p>

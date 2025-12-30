@@ -10,25 +10,26 @@ import styles from "./SideNavigation.module.css";
 import avatardefault from "../../../assets/avatar-default.jpg";
 import NavItem from "../../../components/NavItem/NavItem";
 import { logout } from "../../../api/auth";
+import Avatar from "../../../components/Avatar/Avatar";
+import { AuthService } from "../../../services/auth.service";
 function SideNavigation({ leftTab, setLeftTab }) {
   const navigate = useNavigate();
-
-   const handleLogout = () => {
+  const currentUser = AuthService.getUser();
+  const handleLogout = () => {
     logout();
     navigate("/login", { replace: true });
   };
   return (
     <div className={styles.wrapper}>
-      <div className={styles.avatar}>
-        <img src={avatardefault} alt="avatar mặc định" />
-      </div>
+     
+        <Avatar userid={currentUser.id} />
+     
       <div className={styles.menuNavItem}>
         <div className={styles.menuTop}>
           <NavItem
             active={leftTab === "chat"}
             onClick={() => setLeftTab("chat")}
           >
-        
             <FontAwesomeIcon icon={faMessage} />
           </NavItem>
 

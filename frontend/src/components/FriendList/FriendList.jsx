@@ -13,7 +13,6 @@ function FriendList({setSelectedId}) {
     const handleGetConversation = async () => {
       try {
         const res = await getConversations();
-        console.log(res)
         setConversations(res);
       } catch (err) {
         console.log("Lỗi khi lấy danh sách cuộc trò chuyện", err);

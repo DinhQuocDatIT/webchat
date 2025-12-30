@@ -7,9 +7,6 @@ function ChatWindow({ conversation }) {
   const currentUser = AuthService.getUser();
   const friend = conversation.participants.find((p) => p.id !== currentUser.id);
 
-  console.log(conversation);
-  console.log(conversation.id);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.chatheader}>

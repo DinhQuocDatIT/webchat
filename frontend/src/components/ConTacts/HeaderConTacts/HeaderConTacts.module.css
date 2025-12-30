@@ -6,4 +6,5 @@
   height: 60px;
   padding: 10px;
   border-bottom: var(--p-solid-boder);
+  font-weight: 600;
 }

@@ -1,7 +1,10 @@
 package datdq0317.edu.ut.vn.dinhquocdat.backend.service;
 
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.FriendResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.FriendStatusResponse;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.IncomingFriendRequestResponse;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.OutgoingFriendRequestResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Friend;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.FriendshipStatus;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
@@ -160,6 +163,27 @@ public class FriendService implements IFriendService {
         }
 
         return new FriendStatusResponse("NONE", "NONE", true);
+    }
+
+    @Override
+    public List<IncomingFriendRequestResponse> getIncomingFriendRequests(Integer userId) {
+        List<Friend> friends = friendRepository.getIncomingFriendRequests(userId);
+        List<IncomingFriendRequestResponse> friendResponses = new ArrayList<>();
+        for (Friend f : friends) {
+            friendResponses.add(new IncomingFriendRequestResponse(f));
+        }
+        return  friendResponses;
+    }
+
+    @Override
+    public List<OutgoingFriendRequestResponse> getOutgoingFriendRequests(Integer userId) {
+        List<Friend> friends = friendRepository.getOutgoingFriendRequests(userId);
+        List<OutgoingFriendRequestResponse> friendResponses = new ArrayList<>();
+        for (Friend f : friends) {
+            friendResponses.add(new OutgoingFriendRequestResponse(f));
+
+        }
+        return friendResponses;
     }
 
 

@@ -1,9 +1,10 @@
 import Chat from "../../../components/Chat/Chat";
+import FriendRequestList from "../../../components/ConTacts/FriendRequestList/FriendRequestList";
 import MyFriends from "../../../components/ConTacts/MyFriends/MyFriends";
 import styles from "./ChatMain.module.css";
-function ChatMain({ leftTab, selectedId }) {
+function ChatMain({ leftTab, selectedId, setSelectedId }) {
   if (leftTab === "chat") {
-    if (!selectedId ||selectedId ===null) {
+    if (!selectedId ||typeof selectedId === "string") {
       return (
         <div className={styles.wrapper}>
           <div>Chọn 1 cuộn trò chuyện</div>
@@ -22,7 +23,7 @@ function ChatMain({ leftTab, selectedId }) {
         {selectedId == "groupAndCommunityList" && (
           <div>groupAndCommunityList</div>
         )}
-        {selectedId == "friendRequestList" && <div>friendRequestList</div>}
+        {selectedId == "friendRequestList" && <FriendRequestList/>}
         {selectedId == "groupAndCommunityInviteList" && (
           <div>groupAndCommunityInviteList</div>
         )}
