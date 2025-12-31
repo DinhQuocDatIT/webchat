@@ -1,11 +1,10 @@
 .wrapper {
-  all: unset; /* 🔥 reset toàn bộ style mặc định */
+  all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 12px 10px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
   transition: all 0.3s ease;
 }
 
@@ -14,12 +13,20 @@
   color: var(--p-white);
 }
 
-.wrapper:hover,
-.wrapper:focus-visible {
-  background-color: rgba(60, 60, 60, 0.2);
+/* Hover chỉ là hover */
+.wrapper:hover {
+  background-color: rgba(102, 102, 102, 0.4);
   border-radius: 8px;
 }
-.wrapper:focus {
-  background-color: rgba(60, 60, 60, 0.2);
+
+/* Active do React control */
+.active {
+  background-color: rgba(102, 102, 102, 0.4);
+  border-radius: 8px;
+}
+
+/* Focus cho keyboard (accessibility) */
+.wrapper:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 8px;
 }

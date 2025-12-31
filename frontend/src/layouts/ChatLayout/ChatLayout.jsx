@@ -16,6 +16,7 @@ function ChatLayout({ leftTab, setLeftTab, selectedId, setSelectedId}) {
       <div className={styles.conversationSidebar}>
         <ConversationSidebar
           leftTab={leftTab}
+          selectedId ={selectedId}
           setSelectedId={setSelectedId}
         />
       </div>

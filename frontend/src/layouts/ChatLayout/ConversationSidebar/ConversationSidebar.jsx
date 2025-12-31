@@ -4,7 +4,7 @@ import FriendList from "../../../components/FriendList/FriendList";
 
 import styles from "./ConversationSidebar.module.css";
 
-function ConversationSidebar({ leftTab, setSelectedId }) {
+function ConversationSidebar({ leftTab,selectedId, setSelectedId }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -15,7 +15,9 @@ function ConversationSidebar({ leftTab, setSelectedId }) {
         {leftTab === "chat" && <FriendList setSelectedId={setSelectedId} />}
 
         {leftTab === "contacts" && (
-          <ContactsSidebar setSelectedId={setSelectedId} />
+          <ContactsSidebar  
+          selectedId={selectedId} 
+          setSelectedId={setSelectedId} />
         )}
       </div>
     </div>
