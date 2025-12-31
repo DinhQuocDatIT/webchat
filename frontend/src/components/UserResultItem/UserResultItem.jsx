@@ -27,7 +27,13 @@ function UserResultItem({ user }) {
     try {
       setLoading(true);
       await addFriend(user.id);
-      setStatus({ status: "PENDING", direction: "OUTGOING", canSend: false });
+
+      // hoặc gọi lại fetchStatus()
+      setStatus({
+        status: "PENDING",
+        direction: "OUTGOING",
+        canSend: false,
+      });
     } finally {
       setLoading(false);
     }
@@ -38,7 +44,12 @@ function UserResultItem({ user }) {
     try {
       setLoading(true);
       await unFriend(user.id);
-      setStatus({ status: "NONE", direction: "NONE", canSend: true });
+
+      setStatus({
+        status: "NONE",
+        direction: "NONE",
+        canSend: true,
+      });
     } finally {
       setLoading(false);
     }
@@ -49,19 +60,30 @@ function UserResultItem({ user }) {
     try {
       setLoading(true);
       await acceptFriend(user.id);
-      setStatus({ status: "ACCEPTED", direction: "NONE", canSend: false });
+
+      setStatus({
+        status: "ACCEPTED",
+        direction: "NONE",
+        canSend: false,
+      });
     } finally {
       setLoading(false);
     }
   };
 
-  // Từ chối
+  // ❗ FIX LỖI Ở ĐÂY
+  // Từ chối → reset hoàn toàn trạng thái
   const handleReject = async () => {
     try {
       setLoading(true);
       await rejectFriend(user.id);
-      // mình là người từ chối → vẫn được gửi lại
-      setStatus({ status: "REJECTED", direction: "INCOMING", canSend: true });
+
+      setStatus({
+        status: "NONE",
+        direction: "NONE",
+        canSend: true,
+      });
+      // hoặc: await fetchStatus();
     } finally {
       setLoading(false);
     }
@@ -77,7 +99,7 @@ function UserResultItem({ user }) {
       </div>
 
       <div className={styles.action}>
-        {/* Chưa có quan hệ hoặc được gửi lại */}
+        {/* Chưa có quan hệ */}
         {status?.canSend && (
           <button disabled={loading} onClick={handleAddFriend}>
             {loading ? "Đang gửi..." : "Kết bạn"}
