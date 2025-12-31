@@ -1,7 +1,9 @@
 import styles from "./Conversation.module.css";
-import avatardefault from "../../assets/avatar-default.jpg";
-import { AuthService } from "../../services/auth.service";
-function Conversation({ conversation, setSelectedId }) {
+import avatardefault from "../../../assets/avatar-default.jpg";
+import { AuthService } from "../../../services/auth.service";
+import { useChat } from "../../../contexts/ChatContext";
+function Conversation({ conversation }) {
+  const { setSelectedId } = useChat();
   const currentUser = AuthService.getUser();
   const friend = conversation.participants.find((p) => p.id !== currentUser.id);
   const handleSubmit = () => {

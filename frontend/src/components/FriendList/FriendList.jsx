@@ -1,12 +1,8 @@
 import styles from "./FriendList.module.css";
-import avatardefault from "../../assets/avatar-default.jpg";
 import { useEffect, useState, useCallback } from "react";
-import { getFriend } from "../../api/friends";
-import webSocketService from "../../sockets/WebSocketService";
-import { AuthService } from "../../services/auth.service";
 import { getConversations } from "../../api/conversations";
-import Conversation from "../Conversation/Conversation";
-function FriendList({setSelectedId}) {
+import Conversation from "./Conversation/Conversation";
+function FriendList() {
   const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
@@ -24,7 +20,7 @@ function FriendList({setSelectedId}) {
     <div className={styles.wrapper}>
       {conversations.map((conversation) => (
         <div key={conversation.id} className={styles.item}>
-          <Conversation conversation={conversation} setSelectedId={setSelectedId}/>
+          <Conversation conversation={conversation} />
         </div>
       ))}
     </div>

@@ -3,7 +3,9 @@ import FriendRequestList from "../../../components/ConTacts/FriendRequestList/Fr
 import MyFriends from "../../../components/ConTacts/MyFriends/MyFriends";
 import styles from "./ChatMain.module.css";
 import { CONTACTS_TAB } from "../../../constants/contactsMenu";
-function ChatMain({ leftTab, selectedId, setSelectedId }) {
+import { useChat } from "../../../contexts/ChatContext";
+function ChatMain() {
+  const { leftTab, selectedId } = useChat();
   if (leftTab === "chat") {
     if (!selectedId || typeof selectedId === "string") {
       return (

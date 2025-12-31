@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import ChatLayout from "../../layouts/ChatLayout/ChatLayout";
 import WebSocketService from "../../sockets/WebSocketService";
 import { AuthService } from "../../services/auth.service";
+import { ChatProvider } from "../../contexts/ChatContext";
 
 function Messages() {
-  const [leftTab, setLeftTab] = useState("chat");
-  const [selectedId, setSelectedId] = useState(null);
-
   useEffect(() => {
     WebSocketService.connect(
       () => {
@@ -28,12 +26,9 @@ function Messages() {
     };
   }, []);
   return (
-    <ChatLayout
-      leftTab={leftTab}
-      setLeftTab={setLeftTab}
-      selectedId={selectedId}
-      setSelectedId={setSelectedId}
-    />
+    <ChatProvider>
+      <ChatLayout />
+    </ChatProvider>
   );
 }
 

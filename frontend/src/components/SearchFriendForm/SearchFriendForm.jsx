@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./SearchFriendForm.module.css";
 import { getUserByUsername } from "../../api/user";
 import avatardefault from "../../assets/avatar-default.jpg";
-import UserResultItem from "../UserResultItem/UserResultItem";
+import UserResultItem from "./UserResultItem/UserResultItem";
 function SearchFriendForm({ onClick }) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,7 +38,9 @@ function SearchFriendForm({ onClick }) {
 
       <div className={styles.content}>
         <div className={styles.inputPhone}>
-          <div className={styles.country}><p>VN</p></div>
+          <div className={styles.country}>
+            <p>VN</p>
+          </div>
           <input
             type="text"
             placeholder="Số điện thoại"
@@ -54,20 +56,20 @@ function SearchFriendForm({ onClick }) {
           {user && (
             <div className={styles.searchResult}>
               <p className={styles.searchTitle}>Kết quả tìm kiếm </p>
-            
-              <UserResultItem user={user}/>
-               
+
+              <UserResultItem user={user} />
             </div>
           )}
         </div>
       </div>
 
       <div className={styles.footer}>
-         <button type="submit"  className={styles.search}>Tìm kiếm</button>
+        <button type="submit" className={styles.search}>
+          Tìm kiếm
+        </button>
         <button type="button" onClick={onClick}>
           Hủy
         </button>
-       
       </div>
     </form>
   );

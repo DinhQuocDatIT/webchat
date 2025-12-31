@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { getFriendOutgoing, unFriend } from "../../../../api/friends";
 import Avatar from "../../../Avatar/Avatar";
 import { formatDateTime } from "../../../../utils/formatDateTime";
+import { useChatActions } from "../../../../contexts/useChatActions";
 function OutgoingFriendRequests() {
   const [friendReceivers, setFriendReceivers] = useState([]);
   const [loadingCancelId, setLoadingCancelId] = useState(null);
+  const { startChatWithUser } = useChatActions();
   useEffect(() => {
     const handleOutgoing = async () => {
       try {
@@ -46,9 +48,14 @@ function OutgoingFriendRequests() {
                 <Avatar userid={request.receiverId} />
                 <div className={styles.infor}>
                   <p className={styles.name}>{request.receiverName}</p>
-                  <p className={styles.time}>{formatDateTime(request.createdAt)}</p>
+                  <p className={styles.time}>
+                    {formatDateTime(request.createdAt)}
+                  </p>
                 </div>
-                <button className={styles.message}>
+                <button
+                  className={styles.message}
+                  onClick={() => startChatWithUser(request.receiverId)}
+                >
                   <FontAwesomeIcon icon={faCommentDots} />
                 </button>
               </div>

@@ -4,6 +4,8 @@ import MessageInput from "./MessageInput/MessageInput";
 import styles from "./ChatWindow.module.css";
 import { AuthService } from "../../../services/auth.service";
 function ChatWindow({ conversation }) {
+  console.log("ádasdsa");
+  console.log(conversation);
   const currentUser = AuthService.getUser();
   const friend = conversation.participants.find((p) => p.id !== currentUser.id);
 
@@ -12,8 +14,8 @@ function ChatWindow({ conversation }) {
       <div className={styles.chatheader}>
         <ChatHeader friend={friend} />
       </div>
-      <div className={styles.messageList} >
-        <MessageList  conversation={conversation}/>
+      <div className={styles.messageList}>
+        <MessageList conversation={conversation} />
       </div>
       <div className={styles.messageInput}>
         <MessageInput conversationId={conversation.id} />

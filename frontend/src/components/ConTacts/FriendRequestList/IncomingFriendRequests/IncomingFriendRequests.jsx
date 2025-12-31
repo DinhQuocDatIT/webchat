@@ -9,12 +9,13 @@ import {
 } from "../../../../api/friends";
 import Avatar from "../../../Avatar/Avatar.jsx";
 import { formatDateTime } from "../../../../utils/formatDateTime.jsx";
+import { useChatActions } from "../../../../contexts/useChatActions.jsx";
 
 function IncomingFriendRequests() {
   const [friendRequests, setFriendRequests] = useState([]);
   const [loadingAddId, setLoadingAddId] = useState(null);
   const [loadingCancelId, setLoadingCancelId] = useState(null);
-
+  const { startChatWithUser } = useChatActions();
   // Lấy danh sách lời mời
   useEffect(() => {
     const fetchFriendRequests = async () => {
@@ -78,7 +79,10 @@ function IncomingFriendRequests() {
                 </p>
               </div>
 
-              <button className={styles.message}>
+              <button
+                className={styles.message}
+                onClick={() => startChatWithUser(request.senderId)}
+              >
                 <FontAwesomeIcon icon={faCommentDots} />
               </button>
             </div>

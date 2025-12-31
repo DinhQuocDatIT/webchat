@@ -1,10 +1,12 @@
 import AddFriend from "../../../components/AddFriend/AddFriend";
 import ContactsSidebar from "../../../components/ContactsSidebar/ContactsSidebar";
 import FriendList from "../../../components/FriendList/FriendList";
+import { useChat } from "../../../contexts/ChatContext";
 
 import styles from "./ConversationSidebar.module.css";
 
-function ConversationSidebar({ leftTab,selectedId, setSelectedId }) {
+function ConversationSidebar() {
+  const { leftTab } = useChat();
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -12,13 +14,9 @@ function ConversationSidebar({ leftTab,selectedId, setSelectedId }) {
       </div>
 
       <div className={styles.content}>
-        {leftTab === "chat" && <FriendList setSelectedId={setSelectedId} />}
+        {leftTab === "chat" && <FriendList />}
 
-        {leftTab === "contacts" && (
-          <ContactsSidebar  
-          selectedId={selectedId} 
-          setSelectedId={setSelectedId} />
-        )}
+        {leftTab === "contacts" && <ContactsSidebar />}
       </div>
     </div>
   );

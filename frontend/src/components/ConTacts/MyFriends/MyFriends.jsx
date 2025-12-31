@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ListFriend from "../../ListFriend/ListFriend";
 import HeaderConTacts from "../HeaderConTacts/HeaderConTacts";
 import styles from "./MyFriends.module.css";
 import { getFriend } from "../../../api/friends";

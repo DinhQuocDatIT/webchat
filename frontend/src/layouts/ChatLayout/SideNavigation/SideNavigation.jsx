@@ -12,7 +12,9 @@ import NavItem from "../../../components/NavItem/NavItem";
 import { logout } from "../../../api/auth";
 import Avatar from "../../../components/Avatar/Avatar";
 import { AuthService } from "../../../services/auth.service";
-function SideNavigation({ leftTab, setLeftTab }) {
+import { useChat } from "../../../contexts/ChatContext";
+function SideNavigation() {
+  const { leftTab, setLeftTab } = useChat();
   const navigate = useNavigate();
   const currentUser = AuthService.getUser();
   const handleLogout = () => {
@@ -21,9 +23,8 @@ function SideNavigation({ leftTab, setLeftTab }) {
   };
   return (
     <div className={styles.wrapper}>
-     
-        <Avatar userid={currentUser.id} />
-     
+      <Avatar userid={currentUser.id} />
+
       <div className={styles.menuNavItem}>
         <div className={styles.menuTop}>
           <NavItem

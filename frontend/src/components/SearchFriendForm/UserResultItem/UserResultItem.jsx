@@ -1,5 +1,5 @@
 import styles from "./UserResultItem.module.css";
-import avatardefault from "../../assets/avatar-default.jpg";
+import avatardefault from "../../../assets/avatar-default.jpg";
 import { useEffect, useState } from "react";
 import {
   addFriend,
@@ -7,7 +7,7 @@ import {
   rejectFriend,
   unFriend,
   getFriendStatus,
-} from "../../api/friends";
+} from "../../../api/friends";
 
 function UserResultItem({ user }) {
   const [status, setStatus] = useState(null);

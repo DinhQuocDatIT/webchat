@@ -5,7 +5,10 @@ import avatarDefaule from "../../assets/avatar-default.jpg";
 import { addFriend, getFriendStatus, unFriend } from "../../api/friends";
 import { useEffect, useState } from "react";
 import { AuthService } from "../../services/auth.service";
+import { useChatActions } from "../../contexts/useChatActions";
+
 function UserInfoModal({ user, onClick }) {
+  const { startChatWithUser } = useChatActions();
   const [status, setStatus] = useState(null);
   const currentUser = AuthService.getUser();
   useEffect(() => {
@@ -37,7 +40,6 @@ function UserInfoModal({ user, onClick }) {
       console.log("Lỗi", err);
     }
   };
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.userInfor}>
@@ -67,14 +69,19 @@ function UserInfoModal({ user, onClick }) {
             )}
             {status?.status === "PENDING" &&
               status?.direction === "OUTGOING" && (
-                <button  onClick={handleCancel} className={styles.buttonLeft}>
+                <button onClick={handleCancel} className={styles.buttonLeft}>
                   Hủy gửi lời mời
                 </button>
               )}
             {status?.status === "ACCEPTED" && (
               <button className={styles.buttonLeft}>Gọi điện</button>
             )}
-            <button className={styles.message}>Nhắn tin</button>
+            <button
+              className={styles.message}
+              onClick={() => startChatWithUser(user.id)}
+            >
+              Nhắn tin
+            </button>
           </div>
         )}
 
