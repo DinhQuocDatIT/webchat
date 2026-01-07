@@ -28,8 +28,6 @@ public class AuthController {
     @Autowired
     private IUserService userService;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private JwtUtils jwtUtils;
 
 
@@ -47,9 +45,7 @@ public class AuthController {
         }
         //tạo user
         User user = new User(signUpRequest.getUsername(), signUpRequest.getPassword(), signUpRequest.getEmail(),signUpRequest.getFullName());
-        user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-        user.setRole(Role.ROLE_USER);
-        userService.save(user);
+        userService.register(user);
         return ResponseEntity.ok("User registered successfully!");
     }
     @PostMapping("/signin")

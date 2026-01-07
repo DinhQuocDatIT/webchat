@@ -8,15 +8,25 @@ import datdq0317.edu.ut.vn.dinhquocdat.backend.model.UserStatus;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.repository.IFriendRepository;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements IUserService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private IUserRepository userRepository;
 
@@ -88,6 +98,33 @@ public class UserService implements IUserService {
           userRepository.save(u);
       });
         return new UserResponse(user.get());
+    }
+
+    @Override
+    public void changeAvatar(Integer userId, MultipartFile file) throws IOException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng"));
+        String fileName = UUID.randomUUID()+"_"+user.getUsername()+"_"+file.getOriginalFilename();
+        Path uploadDir = Paths.get("uploads");
+        if (!Files.exists(uploadDir)) {
+            Files.createDirectories(uploadDir);
+        }
+        Path filePath = uploadDir.resolve(fileName);
+        Files.copy(
+                file.getInputStream(),
+                filePath,
+                StandardCopyOption.REPLACE_EXISTING
+        );
+        user.setAvatar(fileName);
+        userRepository.save(user);
+    }
+
+    @Override
+    public User register(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.ROLE_USER);
+        user.setAvatar("avatar-default.png");
+        User savedUser = userRepository.save(user);
+        return savedUser;
     }
 
 

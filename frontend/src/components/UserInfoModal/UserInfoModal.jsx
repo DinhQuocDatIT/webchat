@@ -1,16 +1,20 @@
 import styles from "./UserInfoModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCamera } from "@fortawesome/free-regular-svg-icons";
 import avatarDefaule from "../../assets/avatar-default.jpg";
 import { addFriend, getFriendStatus, unFriend } from "../../api/friends";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AuthService } from "../../services/auth.service";
 import { useChatActions } from "../../contexts/useChatActions";
+import { changeAvatar } from "../../api/user";
 
 function UserInfoModal({ user, onClick }) {
   const { startChatWithUser } = useChatActions();
   const [status, setStatus] = useState(null);
   const currentUser = AuthService.getUser();
+
+  const URL_IMG = import.meta.env.VITE_API_URL_IMG + user.avatar;
   useEffect(() => {
     fetchStatus();
   }, [user.id]);
@@ -40,6 +44,39 @@ function UserInfoModal({ user, onClick }) {
       console.log("Lỗi", err);
     }
   };
+  const fileInputRef = useRef(null);
+  const handleClick = () => {
+    fileInputRef.current.click();
+  };
+  const handleChangeAvatar = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate nhanh
+    if (!file.type.startsWith("image/")) {
+      alert("Chỉ được chọn ảnh");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Ảnh tối đa 5MB");
+      e.target.value = "";
+      return;
+    }
+
+    try {
+      await changeAvatar(file);
+      alert("Đổi avatar thành công");
+    } catch (err) {
+      console.error("Đổi avatar thất bại");
+      console.error(err);
+      alert("Đổi avatar thất bại");
+    } finally {
+      e.target.value = "";
+    }
+  };
+
+  // thay đổi ảnh đại diện
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.userInfor}>
@@ -51,7 +88,21 @@ function UserInfoModal({ user, onClick }) {
         </div>
         <div className={styles.avatarAndFullName}>
           <div className={styles.avatar}>
-            <img src={avatarDefaule} alt="Ảnh đại diện" />
+            <img src={URL_IMG} alt="Ảnh đại diện" />
+            {user.id === currentUser.id && (
+              <>
+                <button onClick={handleClick}>
+                  <FontAwesomeIcon icon={faCamera} />
+                </button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={handleChangeAvatar}
+                />
+              </>
+            )}
           </div>
           <div className={styles.fullName}>
             <p className={styles.name}>{user.fullName}</p>

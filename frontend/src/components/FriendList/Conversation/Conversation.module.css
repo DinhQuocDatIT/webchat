@@ -17,12 +17,6 @@
 .wrapper:focus {
   background-color: var(--p-50);
 }
-.wrapper img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
 .infroItem {
   flex: 1;
   gap: 4px;

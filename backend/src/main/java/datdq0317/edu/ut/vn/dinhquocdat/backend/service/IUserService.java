@@ -3,7 +3,9 @@ import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.UserResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.Role;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,4 +28,6 @@ public interface IUserService {
     List<UserResponse> findAll();
     Optional<UserResponse> findByUsernameResponse(String username);
     UserResponse connect(UserResponse response);
+    void changeAvatar(Integer userId, MultipartFile file) throws IOException;
+    User register(User user);
 }

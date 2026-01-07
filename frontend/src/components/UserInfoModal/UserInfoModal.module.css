@@ -55,10 +55,32 @@
   border-radius: 8px;
 }
 .avatar {
+  position: relative;
   width: 70px;
   height: 70px;
   border-radius: 50%;
 }
+.avatar button {
+  position: absolute;
+  bottom: 0;
+  right: -15%;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: var(--p-white);
+  border-radius: 50%;
+  color: var(--p-700);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.avatar button:hover {
+  background-color: var(--p-50);
+  color: var(--p-white);
+}
+
 .avatar img {
   border: 3px solid white;
   width: 100%;

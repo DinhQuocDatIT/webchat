@@ -49,7 +49,7 @@ function MessageList({ conversation }) {
         } else {
           return (
             <div className={styles.receiver} key={message.id}>
-               <Avatar userid ={message.senderId}/>
+               <Avatar userid ={message.senderId} isFormInfo={true}/>
               <div className={styles.messageContent}>
                 <p className={styles.name}>{message.senderName}</p>
                 <p className={styles.content}>{message.content}</p>

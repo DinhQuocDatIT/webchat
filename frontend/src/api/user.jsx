@@ -9,3 +9,17 @@ export const getUserByUsername = (username) => {
 export const getUsersById = (userId) => {
   return axiosInstance.get(`/users/${userId}`);
 };
+export const changeAvatar = (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  return axiosInstance.post(
+    "/users/change-avatar",
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};

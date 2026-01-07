@@ -45,7 +45,7 @@ function OutgoingFriendRequests() {
           return (
             <div className={styles.item} key={request.id}>
               <div className={styles.itemHeader}>
-                <Avatar userid={request.receiverId} />
+                <Avatar userid={request.receiverId} isFormInfo={true} />
                 <div className={styles.infor}>
                   <p className={styles.name}>{request.receiverName}</p>
                   <p className={styles.time}>

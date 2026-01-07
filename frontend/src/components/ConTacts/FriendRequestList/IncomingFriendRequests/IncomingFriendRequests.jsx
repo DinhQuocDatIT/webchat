@@ -70,7 +70,7 @@ function IncomingFriendRequests() {
         {friendRequests.map((request) => (
           <div className={styles.item} key={request.id}>
             <div className={styles.itemHeader}>
-              <Avatar userid={request.senderId} />
+              <Avatar userid={request.senderId} isFormInfo={true} />
 
               <div className={styles.infor}>
                 <p className={styles.name}>{request.senderName}</p>

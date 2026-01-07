@@ -3,6 +3,7 @@ package datdq0317.edu.ut.vn.dinhquocdat.backend.controller;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.request.DetailFriendRequest;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.dto.response.UserResponse;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.model.User;
+import datdq0317.edu.ut.vn.dinhquocdat.backend.security.UserDetailsImpl;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.service.IFriendService;
 import datdq0317.edu.ut.vn.dinhquocdat.backend.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +38,15 @@ public class UserController {
         return userService.findById(id)
                 .map(user -> ResponseEntity.ok(new UserResponse(user)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+    @PostMapping("/change-avatar")
+    public ResponseEntity<?> changeAvatar(
+            @RequestParam MultipartFile file,
+            Authentication authentication)
+            throws IOException {
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        userService.changeAvatar(userDetails.getId(), file);
+        return ResponseEntity.ok("Đổi avatar thành công");
     }
     @GetMapping("/by-username")
     public ResponseEntity<UserResponse> getUserByUsername(@RequestParam String username) {
@@ -59,5 +72,6 @@ public class UserController {
             );
 
     }
+
 
 }

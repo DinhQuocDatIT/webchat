@@ -23,7 +23,7 @@ function SideNavigation() {
   };
   return (
     <div className={styles.wrapper}>
-      <Avatar userid={currentUser.id} />
+      <Avatar userid={currentUser.id} isFormInfo={true} />
 
       <div className={styles.menuNavItem}>
         <div className={styles.menuTop}>

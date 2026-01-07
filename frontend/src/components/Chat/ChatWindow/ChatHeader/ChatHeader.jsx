@@ -24,7 +24,7 @@ function ChatHeader({ friend }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.friendInfor}>
-        <Avatar userid={friend.id} />
+        <Avatar userid={friend.id} isFormInfo={true} />
         <div className={styles.infor}>
           <p className={styles.name}>{friend.fullName}</p>
           {statusFriend === "ONLINE" ? (
