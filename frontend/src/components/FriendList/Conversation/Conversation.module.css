@@ -23,10 +23,26 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
 }
-.infroItem p:first-child {
-  font-weight: 500;
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.topRow .name {
+  color: black;
+  font-size: var(--p-font-size);
+}
+.topRow .time {
+  color: rgb(108, 108, 108);
+  font-size: 12px;
+}
+.lastMessage {
+  color: rgb(108, 108, 108);
   font-size: 14px;
-  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 230px;
 }

@@ -45,6 +45,7 @@ public class MessageService implements IMessageService {
             message.setConversation(conversation);
             Message saveMessage =  messageRepository.save(message);
             conversation.setLastMessageAt(saveMessage.getCreatedAt());
+            conversation.setLastMessage(saveMessage.getContent());
         return new MessageResponse(saveMessage);
     }
 

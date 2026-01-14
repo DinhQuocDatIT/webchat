@@ -20,11 +20,12 @@ public class ConversationResponse {
     private Long id;
     private Set<UserResponse> participants;
     private LocalDateTime lastMessageAt;
-
+    private String lastMessage;
     public ConversationResponse(Conversation conversation) {
         this.id = conversation.getId();
         setParticipants(conversation.getParticipants());
         this.lastMessageAt = conversation.getLastMessageAt();
+        this.lastMessage = conversation.getLastMessage();
     }
 
     public void setParticipants(Set<User> users) {

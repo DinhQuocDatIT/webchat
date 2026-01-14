@@ -28,7 +28,7 @@ public class Conversation {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> participants = new HashSet<>();
-
+    private String lastMessage;
     private LocalDateTime lastMessageAt;
     @OneToMany(mappedBy = "conversation", fetch = FetchType.LAZY)
     @JsonIgnore

@@ -25,10 +25,9 @@ public class MessageController {
     private SimpMessagingTemplate messagingTemplate;
     @PostMapping
     public MessageResponse sendMessage(@Valid @RequestBody MessageRequest messageRequest) {
-        System.out.println("Vô được");
         MessageResponse message = messageService.saveMessage(messageRequest);
-        messagingTemplate.convertAndSend("/topic/messages/"+ messageRequest.getConversationId(), message);
-        System.out.println("quá dữ");
+        messagingTemplate.convertAndSend(
+                "/topic/messages/"+ messageRequest.getConversationId(), message);
         return message;
     }
 }
